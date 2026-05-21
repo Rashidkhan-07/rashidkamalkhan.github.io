@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rashid Kamal Khan — Administrative Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D0D0D;
+    --dark2: #141414;
+    --dark3: #1C1C1C;
+    --dark4: #242424;
+    --text: #E8E4DC;
+    --text-muted: #8A8578;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 60px;
+    gap: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { animation: fadeUp 1s ease both; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid var(--border);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .hero h1 span { color: var(--gold); font-style: italic; }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 44px;
+  }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(201,168,76,0.3);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* PHOTO */
+  .hero-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeUp 1s ease 0.3s both;
+    position: relative;
+  }
+
+  .photo-frame {
+    position: relative;
+    width: 380px;
+    height: 460px;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
+    border-radius: 200px 200px 160px 160px;
+    z-index: 0;
+  }
+
+  .photo-frame img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 198px 198px 158px 158px;
+    border: 3px solid var(--dark);
+  }
+
+  .photo-badge {
+    position: absolute;
+    bottom: 20px;
+    right: -20px;
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    border-radius: 16px;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+  }
+
+  .photo-badge .badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .photo-badge .badge-text {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    margin-bottom: 60px;
+    line-height: 1.15;
+  }
+
+  .section-title span { color: var(--gold); font-style: italic; }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 0 60px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+
+  .about-text p { margin-bottom: 20px; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    border-radius: 16px;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--dark2); padding: 100px 0; }
+  .skills-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-item {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .skill-item:hover {
+    border-color: var(--gold);
+    background: var(--dark4);
+    transform: translateX(6px);
+  }
+
+  .skill-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skill-name {
+    font-size: 0.88rem;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  /* EXPERIENCE */
+  .exp-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .exp-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    transform: translateY(-4px);
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .exp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .exp-date {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--border);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .exp-duties {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .exp-duties li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .exp-duties li::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .edu-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 32px;
+    border-radius: 16px;
+    transition: all 0.3s;
+  }
+
+  .edu-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-4px);
+  }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .edu-institute {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .edu-year {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* LANGUAGES */
+  .lang-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .lang-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 28px 40px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s;
+    min-width: 160px;
+  }
+
+  .lang-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .lang-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .lang-level {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* HOBBIES */
+  .hobbies-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hobby-tag {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: all 0.3s;
+  }
+
+  .hobby-tag:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--dark2);
+    padding: 100px 0;
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .contact-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  .contact-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  }
+
+  .contact-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: var(--gold);
+    word-break: break-all;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 60px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  footer span { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; text-align: center; gap: 40px; }
+    .hero-photo { order: -1; }
+    .photo-frame { width: 280px; height: 340px; }
+    .hero-desc { margin: 0 auto 44px; }
+    .hero-btns { justify-content: center; }
+    section { padding: 70px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .exp-duties { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .skills-inner, .contact-inner { padding: 0 24px; }
+    .divider { margin: 0 24px; }
+    .exp-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RKK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:100px; max-width:100%; margin:0;">
+  <div class="hero-text">
+    <div class="hero-tag">Available for Opportunities</div>
+    <h1>Rashid<br><span>Kamal Khan</span></h1>
+    <p class="hero-desc">
+      A dedicated Administrative Assistant based in Doha, Qatar — specializing in office administration, executive support, data analysis, and multi-functional operations at Altayeb Group.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <div class="photo-frame">
+      <img src="photo.jpg" alt="Rashid Kamal Khan" onerror="this.style.background='linear-gradient(135deg,#1C1C1C,#242424)';this.style.display='flex'"/>
+      <div class="photo-badge">
+        <div class="badge-num">1+</div>
+        <div class="badge-text">Years in<br>Qatar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">Who <span>I Am</span></h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I am Rashid Kamal Khan, a dedicated and multi-functional Administrative Assistant based in Doha, Qatar. I currently work at Tyres and Equipment Centre under Altayeb Group — the sole authorized Pirelli tyre distributor in Qatar.</p>
+      <p>I specialize in office administration, executive support, data analysis, procurement, travel management, telecom account handling, and IT coordination.</p>
+      <p>I am passionate about continuous learning, professional growth, and delivering excellence in every task I undertake. My diverse skill set allows me to contribute effectively across multiple departments.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">1+</div>
+        <div class="stat-label">Years Experience in Qatar</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Core Professional Skills</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Languages Known</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Technical Diplomas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<div class="skills-section" id="skills">
+  <div class="skills-inner">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Core <span>Skills</span></h2>
+    <div class="skills-grid reveal">
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Office Administration & Management</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Executive Assistant Support</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Data Analysis (Microsoft Excel)</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Telecom Account Management</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Basic IT Support & Troubleshooting</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Email Drafting & Communication</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">AI Tools Expertise</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Document Management</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Office Procurement & Inventory</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Employee Travel & Ticketing</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Multi-tasking in Fast-paced Environments</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Work <span>Experience</span></h2>
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Administrative Assistant</div>
+        <div class="exp-company">Tyres and Equipment Centre — Altayeb Group, Doha, Qatar</div>
+      </div>
+      <div class="exp-date">June 2025 — Present</div>
+    </div>
+    <ul class="exp-duties">
+      <li>Office administration & daily operations management</li>
+      <li>Assistant to Senior Executive Manager</li>
+      <li>Data analysis & Excel reporting on large datasets</li>
+      <li>Telecom account management (Ooredoo & Vodafone)</li>
+      <li>Office procurement — stationery, cartridges, printers, PCs</li>
+      <li>Employee travel & ticketing management via agents</li>
+      <li>Basic IT support & system troubleshooting</li>
+      <li>Professional email drafting & correspondence</li>
+      <li>Document management & filing</li>
+      <li>Coordination with vendors and service providers</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic</div>
+  <h2 class="section-title">Education & <span>Qualifications</span></h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Arts (B.A.)</div>
+      <div class="edu-institute">Arabic Medium<br>Jamia Sirajul Uloom Al-Salafia<br>Kapilvastu, Nepal</div>
+      <div class="edu-year">2022 — 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Intermediate</div>
+      <div class="edu-institute">Arabic & Islamic Studies<br>Jamia Sirajul Uloom Al-Salafia<br>Kapilvastu, Nepal</div>
+      <div class="edu-year">2020 — 2022</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Computerized Financial Accounting</div>
+      <div class="edu-institute">CFA Certificate<br>Anand Technical Institute<br>Kapilvastu, Nepal</div>
+      <div class="edu-year">2024 — 2025</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Diploma in Computer Application</div>
+      <div class="edu-institute">DCA<br>Info-Tech Computer Institute<br>Kapilvastu, Nepal</div>
+      <div class="edu-year">2023</div>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div style="margin-top: 60px;">
+    <div class="section-label">Communication</div>
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; margin-bottom:32px;">Languages <span style="color:var(--gold);font-style:italic;">Known</span></h3>
+    <div class="lang-grid reveal">
+      <div class="lang-card">
+        <div class="lang-name">Hindi</div>
+        <div class="lang-level">Fluent</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Intermediate</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Arabic</div>
+        <div class="lang-level">Basic</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hobbies -->
+  <div style="margin-top: 60px;">
+    <div class="section-label">Personal</div>
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; margin-bottom:32px;">Hobbies & <span style="color:var(--gold);font-style:italic;">Interests</span></h3>
+    <div class="hobbies-grid reveal">
+      <div class="hobby-tag">📷 Landscape Photography</div>
+      <div class="hobby-tag">🎨 Photo Editing</div>
+      <div class="hobby-tag">🎬 Video Editing</div>
+      <div class="hobby-tag">🎮 Gaming</div>
+      <div class="hobby-tag">🤖 Exploring AI & Technology</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="contact-grid reveal">
+      <a href="mailto:kamalkhanrashid49@gmail.com" class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">kamalkhanrashid49@gmail.com</div>
+      </a>
+      <a href="https://linkedin.com/in/rashid-khan-55460a355" target="_blank" class="contact-card">
+        <div class="contact-icon">💼</div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">rashid-khan-55460a355</div>
+      </a>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div class="contact-label">Location</div>
+        <div class="contact-value">Doha, Qatar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Rashid Kamal Khan</span> — Administrative Assistant, Doha Qatar</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
